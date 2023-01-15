@@ -1,0 +1,7 @@
+server:
+  port: 8080
+
+download:
+  ytdlp:
+    binPath: C:\Users\huanghe\others\yt-dlp\yt-dlp
+    downloadPath: D:\newVideos
