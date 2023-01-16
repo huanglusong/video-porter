@@ -15,11 +15,15 @@ public class YtdlpController {
 
     @Autowired
     private YtdlpDownloader ytdlpDownloader;
-    @RequestMapping("/download")
+    @RequestMapping("/downloadByUrl")
     public String download(String url) {
-        boolean res = ytdlpDownloader.download(url);
+        boolean res = ytdlpDownloader.downloadByUrl(url);
         return res ? "成功" : "失败";
     }
-
+    @RequestMapping("/downloadByVideoId")
+    public String downloadByVideoId(String videoId) {
+        boolean res = ytdlpDownloader.downloadByVideoId(videoId);
+        return res ? "成功" : "失败";
+    }
 
 }

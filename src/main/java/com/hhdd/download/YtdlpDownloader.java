@@ -1,13 +1,14 @@
 package com.hhdd.download;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * yt dlp 下载器
@@ -27,8 +28,24 @@ public class YtdlpDownloader {
     @Value(("${download.ytdlp.downloadPath}"))
     private String ytdlpDownloadPath;
 
-    public boolean download(String url) {
-        ProcessBuilder processBuilder = new ProcessBuilder(ytdlpFullPath, url, "-P", ytdlpDownloadPath).redirectErrorStream(true);
+    public boolean downloadByUrl(String url) {
+        return download(url);
+    }
+    public boolean downloadByVideoId(String videoId) {
+        return download(videoId);
+    }
+
+    public boolean download(String... params) {
+        // 固定参数
+        ArrayList<String> paramList = new ArrayList<>(Arrays.asList(
+                ytdlpFullPath,
+                "-P",
+                ytdlpDownloadPath
+        ));
+        for (String param : params) {
+            paramList.add(param);
+        }
+        ProcessBuilder processBuilder = new ProcessBuilder(paramList).redirectErrorStream(true);
         try {
             Process process = processBuilder.start();
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream(), "gbk"));
@@ -42,4 +59,5 @@ public class YtdlpDownloader {
             return false;
         }
     }
+
 }
