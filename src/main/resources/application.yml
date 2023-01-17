@@ -5,3 +5,8 @@ download:
   ytdlp:
     binPath: C:\Users\huanghe\others\yt-dlp\yt-dlp
     downloadPath: D:\newVideos
+
+
+video-porter:
+  youtube:
+    api-key: AIzaSyCylY17tDV2Pgk3BCyocojEd9c8nO0bMSo
